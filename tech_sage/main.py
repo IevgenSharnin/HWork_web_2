@@ -366,7 +366,9 @@ class Controller():
             name = f'{name}{each[0].capitalize()}{each[1:]} '
         name = name.strip()
         record = self.book.get(name)
-        return record
+        if record:
+            return record
+        else: return name
 
     def do_add_name(self):
         while True:
@@ -376,7 +378,7 @@ class Controller():
                 continue
             record = self.line_to_name(line)
 
-            if record:
+            if type(record) == NoteRecord:
                 print(f"Контакт з ім'ям '{record.name.value}' вже існує.")
                 return
             try:
